@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const port = 3001
 const db = require('./config/db')  // Connect data
-// const route = require('./routes')
+const route = require('./routes')
 
 // Fix req.body
 const bodyParser = require('body-parser')
@@ -27,7 +27,7 @@ app.use(cookieParser())
 app.use(express.json())
 
 // Routes init
-// route(app)
+route(app)
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
