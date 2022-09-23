@@ -36,7 +36,7 @@ const middlewareController = {
                 }
             }
             else {
-                return res.status(403).json("User not found")
+                return res.status(404).json("User not found")
             }
            
         })

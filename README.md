@@ -67,6 +67,7 @@ Updating...
     | address  | string | false    |
     | active  | boolean | false    |
     | role  | string | default student    |
+    | isTeam  | boolean | false    |
 
 - Response:
 ```json
@@ -196,6 +197,7 @@ Updating...
     | address  | string | false    |
     | active  | boolean | false    |
     | role  | string | default student    |
+    | isTeam  | boolean | false    |
 
 - Response:
 ```json
@@ -217,7 +219,7 @@ Updating...
 <details>
 <summary><b>Update User</b></summary><br />
 
-- *PUT: **api/v1/user*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- *PUT: **api/v1/user/:id*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
 - Headers: &nbsp; **[token] : Bearer {accessToken}**
 - Request:
     | params    | type   | require |
@@ -587,3 +589,191 @@ Updating...
 ```
 </details>
 
+<details>
+<summary><b>Get All Topics</b></summary><br />
+
+- *GET: **api/v1/topic*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request: null
+
+- Response:
+```json
+[
+     {
+        "Info topic 1": ""
+    },
+    {
+        "Info topic 2": ""
+    }
+]
+```
+</details>
+
+<details>
+<summary><b>Get A Topic</b></summary><br />
+
+- *GET: **api/v1/topic/:id*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request: null
+
+- Response:
+```json
+{
+    "Info topic": {}
+}
+```
+</details>
+
+<details>
+<summary><b>Add A Topic</b></summary><br />
+
+- *POST: **api/v1/typetopic*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request:
+    | params    | type   | require |
+    | ---       | ---    | ---     |
+    | name  | string | true    |
+    | desc  | string | false    |
+    | target  | string | false    |
+    | product  | string | false    |
+    | technology  | string | false    |
+    | requirement  | string | false    |
+    | idSpecialized  | string | false    |
+    | typeTopic  | string | false    |
+    | status  | string | false    |
+    | sesmeter  | number | false    |
+    | slsv  | string | false    |
+    | leader  | string | false    |
+    | gvhd  | string | false    |
+    | gvpb  | string | false    |
+    | score  | string | false    |
+    | team  | array | false    |
+    | deleted  | boolean | false    |
+
+- Response:
+```json
+{
+    "name": "Xây dựng Website UTEX",
+    "desc": "Trang web giúp cho sinh viên học tập và lấy tài liệu từ giáo viên bộ môn.",
+    "target": "Tìm hiểu về .Net và Anguler",
+    "product": "Web",
+    "technology": "Anguler, .Net",
+    "idSpecialized": "632d6f527669a9e960db1b8a",
+    "typeTopic": "632d246c4284ba88ff521e21",
+    "status": "duyet0",
+    "sesmeter": "1",
+    "slsv": 3,
+    "leader": "632034182674568e23832f4b",
+    "gvhd": "6320380c735c7749d1ea7349",
+    "team": [
+        "632034182674568e23832f4b",
+        "63203c858eddcf04700e33ed"
+    ],
+    "_id": "632db676bb21c7e76fe1f738",
+    "createdAt": "2022-09-23T13:36:54.327Z",
+    "updatedAt": "2022-09-23T13:36:54.327Z",
+    "__v": 0
+}
+```
+</details>
+
+<details>
+<summary><b>Update A Topic</b></summary><br />
+
+- *PUT: **api/v1/topic/:id*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request:
+    | params    | type   | require |
+    | ---       | ---    | ---     |
+    | name  | string | true    |
+    | desc  | string | false    |
+    | target  | string | false    |
+    | product  | string | false    |
+    | technology  | string | false    |
+    | requirement  | string | false    |
+    | idSpecialized  | string | false    |
+    | typeTopic  | string | false    |
+    | status  | string | false    |
+    | sesmeter  | number | false    |
+    | slsv  | string | false    |
+    | leader  | string | false    |
+    | gvhd  | string | false    |
+    | gvpb  | string | false    |
+    | score  | string | false    |
+    | team  | array | false    |
+    | deleted  | boolean | false    |
+
+- Response:
+```json
+{
+    "message": ""
+}
+```
+</details>
+
+<details>
+<summary><b>Delete A Topic</b></summary><br />
+
+- *DELETE: **api/v1/topic/:id*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request: null
+
+- Response:
+```json
+{
+    "message": ""
+}
+```
+</details>
+
+<details>
+<summary><b>1st Approval A Topic</b></summary><br />
+
+- *PATCH: **api/v1/topic/:id/1st*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request: null
+
+- Response:
+```json
+{
+    "message": ""
+}
+```
+</details>
+
+<details>
+<summary><b>2nd Approval A Topic</b></summary><br />
+
+- *PATCH: **api/v1/topic/:id/2nd*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- Headers: &nbsp; **[token] : Bearer {accessToken}**
+- Request: null
+
+- Response:
+```json
+{
+    "message": ""
+}
+```
+</details>
+
+# Message (updating...)
+
+## Error
+- Số lượng sinh viên quá giới hạn....
+- User đã có nhóm...
+- Approval 1st success...
+- Approval 2nd success...
+
+## Success
+- Update success... &nbsp;(200)
+- Delete success... &nbsp;(200)
+
+## Auth
+- Token is not valid &nbsp;(403)
+- You're not authenticated &nbsp;(401)
+- You're not allowed to delete orther... &nbsp;(403)
+- User not found &nbsp;(404)
+- Email already exists &nbsp;(500)
+- Wrong Email... &nbsp;(404)
+- Wrong Password... &nbsp;(404)
+- Logged out success (200)

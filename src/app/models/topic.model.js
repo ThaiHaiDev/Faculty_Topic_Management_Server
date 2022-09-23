@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // const { USER } = require('../../config/constants')
 
 const TopicSchema = new Schema({
-    name: { type: String },
+    name: { type: String, required: true },
     desc: { type: String},
     target: { type: String },
     product: { type: String }, // App or web, ...

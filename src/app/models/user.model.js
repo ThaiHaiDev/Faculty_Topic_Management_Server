@@ -17,7 +17,8 @@ const UserSchema = new Schema({
     phone: { type: String, trim: true},
     address: { type: String, trim: true},
     active: { type: Boolean, default: true },
-    avatar: { type: String }
+    avatar: { type: String },
+    isTeam: { type: Boolean, default: false }
   }, {
     timestamps: true
   });
