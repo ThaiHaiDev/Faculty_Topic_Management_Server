@@ -29,6 +29,6 @@ router.delete('/:id', checkToken.verifyTokenAdminDelete, userController.deleteUs
 router.delete('/', checkToken.verifyTokenAdminDelete, userController.deleteUserWithBody)
 
 // Update A User 
-router.put('/:id', checkToken.verifyTokenAdminUpdate, userController.updateUser)
+router.put('/:id', checkToken.verifyTokenAdminAll, userController.updateUser)
 
 module.exports = router

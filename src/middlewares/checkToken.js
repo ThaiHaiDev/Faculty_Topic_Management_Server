@@ -55,7 +55,7 @@ const middlewareController = {
     },
 
     // verifyTokenAdmin when update
-    verifyTokenAdminUpdate: (req, res, next) => {
+    verifyTokenAdminAll: (req, res, next) => {
         middlewareController.verifyToken(req, res, () => {
             // Nếu id của user login = id user mình muốn AU hoặc là admin
             if(req.user.id == req.params.id || req.user.role === 'dean') { 
