@@ -10,7 +10,7 @@ router.get('/', checkToken.verifyTokenAdmin, userController.getAllUsers)
 // Get A User By Role Dean
 router.get('/dean', checkToken.verifyTokenAdmin, userController.getAUserByRoleDean)
 
-// Get A User By Role Dean
+// Get A User By Role Lecturers
 router.get('/lecturers', checkToken.verifyTokenAdmin, userController.getAUserByRoleLecturers)
 
 // Get A User By Role Student
