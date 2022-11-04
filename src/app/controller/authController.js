@@ -2,6 +2,8 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const ErrorCode = require('../../exceptions/errorCode')
+
 const authController = {
     // REGISTER
     async registerUser (req, res) {
@@ -24,7 +26,7 @@ const authController = {
             res.status(200).json(newUser)
 
         } catch (error) {
-            res.status(500).json("Email already exists")
+            res.status(500).json(USERNAME_EXIST)
         }
     },
 
@@ -57,13 +59,13 @@ const authController = {
         try {
             const user = await User.findOne({ email: req.body.email })
             if(!user) {
-                return res.status(404).json('Wrong Email...');
+                return res.status(404).json(ErrorCode.EMAIL_INVALID);
             }
             const validPassword = await bcrypt.compare(
                 req.body.password, user.password
             )
             if(!validPassword) {
-                return res.status(404).json('Wrong Password...')
+                return res.status(404).json(ErrorCode.INVALID_CHANGE_PASSWORD)
             }
             if (user && validPassword) {
                 const accessToken = authController.generateAccessToken(user);
@@ -92,7 +94,7 @@ const authController = {
         // Lấy refreshToken từ user
         const refreshToken = req.cookies.refreshToken;
 
-        if (!refreshToken) return res.status(401).json("You're not authenticated")
+        if (!refreshToken) return res.status(401).json(ErrorCode.NOT_AUTHENTICATED)
 
         jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
             if(err) {
@@ -116,7 +118,7 @@ const authController = {
     // LOG OUT
     userLogout: async(req, res) => {
         res.clearCookie('refreshToken');
-        res.status(200).json("Logged out success");
+        res.status(200).json(ErrorCode.LOGOUT);
     }
     
 }

@@ -82,7 +82,7 @@ const topicController = {
         try {
             appproval = 'duyet1'
             await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
-            res.status(200).json("Approval 1st success...")
+            res.status(200).json(APPROVAL1ST)
         } catch (error) {
             res.status(500).json(error)
         }
