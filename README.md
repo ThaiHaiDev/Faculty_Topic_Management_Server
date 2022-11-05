@@ -758,6 +758,11 @@ Updating...
 ```
 </details>
 
+<details>
+<summary><b>Get A Topic With Id User</b></summary><br />
+
+</details>
+
 # Message (updating...)
 
 ## Error

@@ -1,6 +1,8 @@
 const Topic = require('../models/topic.model');
 const User = require('../models/user.model');
 
+const checkMaxGv = require('../../services/checkMaxGv')
+
 const topicController = {
     // GET ALL TOPIC
     async getAllTopics (req, res) {
@@ -36,20 +38,26 @@ const topicController = {
     async addTopic(req, res) {
         try{
             const formData = req.body
+
             if (parseInt(req.body.team.length) > parseInt(req.body.slsv)) {
                 res.status(401).json('Số lượng sinh viên quá giới hạn....')
             } else {
-                for (var i = 0; i < parseInt(req.body.team.length); i++) {
-                    const userInTeam = await User.findById(req.body.team[i])
-                    if (userInTeam.isTeam === true) {
-                        return res.status(403).json('User đã có nhóm...')
-                    } else {
-                        await User.updateOne({ _id: req.body.team[i] }, {isTeam: true}) 
+                const topicOfGvhd = await Topic.find({gvhd: req.body.gvhd})
+                if (parseInt(topicOfGvhd.length) > 0) {
+                    res.status(401).json('Giáo viên đã đủ nhóm đăng kí') 
+                } else {
+                    for (var i = 0; i < parseInt(req.body.team.length); i++) {
+                        const userInTeam = await User.findById(req.body.team[i])
+                        if (userInTeam.isTeam === true) {
+                            return res.status(403).json('User đã có nhóm...')
+                        } else {
+                            await User.updateOne({ _id: req.body.team[i] }, {isTeam: true}) 
+                        }
                     }
+                    const newTypeTopic = new Topic(formData)
+                    const saveCate = await newTypeTopic.save()
+                    res.status(200).json(saveCate) 
                 }
-                const newTypeTopic = new Topic(formData)
-                const saveCate = await newTypeTopic.save()
-                res.status(200).json(saveCate) 
             }
         } catch(err) {
             res.status(500).json(err)

@@ -11,10 +11,10 @@ router.get('/', checkToken.verifyTokenAdmin, userController.getAllUsers)
 router.get('/dean', checkToken.verifyTokenAdmin, userController.getAUserByRoleDean)
 
 // Get A User By Role Lecturers
-router.get('/lecturers', checkToken.verifyTokenAdmin, userController.getAUserByRoleLecturers)
+router.get('/lecturers', checkToken.verifyToken, userController.getAUserByRoleLecturers)
 
 // Get A User By Role Student
-router.get('/student', checkToken.verifyTokenAdmin, userController.getAUserByRoleStudent)
+router.get('/student', checkToken.verifyToken, userController.getAUserByRoleStudent)
 
 // Get A User 
 router.get('/:id', checkToken.verifyTokenAdmin, userController.getAUser)
