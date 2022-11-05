@@ -70,7 +70,25 @@ const userController = {
                     break
                 }
             }                                             
-            res.status(200).json('User chưa có nhóm')
+            res.status(200).json('User chưa đăng ký đề tài')
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
+    // GET USER IN TEAM WITH IDUSER 
+    async getMemberInTeam (req, res) {
+        try {
+            const topic = await Topic.find().populate('team')     
+            for (var i = 0; i < topic.length; i++) {
+                const data = topic[i].team.filter(top => {return top._id.toString() === req.params.idUser})
+                if (data.length !== 0) {
+                    const topicOfUser = await Topic.findById(topic[i]._id)
+                    return res.status(200).json(topic[i].team)
+                    break
+                }
+            }                                             
+            res.status(400).json('User không có nhóm')
         } catch (error) {
             res.status(500).json(error)
         }

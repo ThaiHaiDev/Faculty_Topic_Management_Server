@@ -763,6 +763,11 @@ Updating...
 
 </details>
 
+<details>
+<summary><b>GET USER IN TEAM WITH IDUSER</b></summary><br />
+
+</details>
+
 # Message (updating...)
 
 ## Error

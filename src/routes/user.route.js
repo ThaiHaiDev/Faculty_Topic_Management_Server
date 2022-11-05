@@ -34,4 +34,7 @@ router.put('/:id', checkToken.verifyTokenAdminAll, userController.updateUser)
 //
 router.get('/topic/:idUser', checkToken.verifyToken, userController.getATopic)
 
+//
+router.get('/member/:idUser', checkToken.verifyToken, userController.getMemberInTeam)
+
 module.exports = router

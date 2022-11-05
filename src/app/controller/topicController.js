@@ -43,7 +43,7 @@ const topicController = {
                 res.status(401).json('Số lượng sinh viên quá giới hạn....')
             } else {
                 const topicOfGvhd = await Topic.find({gvhd: req.body.gvhd})
-                if (parseInt(topicOfGvhd.length) > 0) {
+                if (parseInt(topicOfGvhd.length) > 8) {
                     res.status(401).json('Giáo viên đã đủ nhóm đăng kí') 
                 } else {
                     for (var i = 0; i < parseInt(req.body.team.length); i++) {
