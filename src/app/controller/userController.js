@@ -65,7 +65,12 @@ const userController = {
             for (var i = 0; i < topic.length; i++) {
                 const data = topic[i].team.filter(top => {return top._id.toString() === req.params.idUser})
                 if (data.length !== 0) {
-                    const topicOfUser = await Topic.findById(topic[i]._id)
+                    const topicOfUser = await Topic.findById(topic[i]._id).populate('idSpecialized')
+                                                                            .populate('typeTopic')
+                                                                            .populate('leader')
+                                                                            .populate('gvhd')
+                                                                            .populate('gvpb')
+                                                                            .populate('team') 
                     return res.status(200).json(topicOfUser)
                     break
                 }
