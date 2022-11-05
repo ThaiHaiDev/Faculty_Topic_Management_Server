@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     address: { type: String, trim: true},
     active: { type: Boolean, default: true },
     avatar: { type: String },
-    isTeam: { type: Boolean, default: false }
+    isTeam: { type: Boolean, default: false },
   }, {
     timestamps: true
   });

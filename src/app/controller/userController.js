@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const Topic = require('../models/topic.model');
 const bcrypt = require('bcrypt');
 
 const userController = {
@@ -52,13 +53,49 @@ const userController = {
         }
     },
 
+    // GET TOPIC WITH IDUSER
+    async getATopic (req, res) {
+        try {
+            const topic = await Topic.find().populate('idSpecialized')
+                                                            .populate('typeTopic')
+                                                            .populate('leader')
+                                                            .populate('gvhd')
+                                                            .populate('gvpb')
+                                                            .populate('team')   
+            for (var i = 0; i < topic.length; i++) {
+                const data = topic[i].team.filter(top => {return top._id.toString() === req.params.idUser})
+                if (data.length !== 0) {
+                    const topicOfUser = await Topic.findById(topic[i]._id)
+                    return res.status(200).json(topicOfUser)
+                    break
+                }
+            }                                             
+            res.status(200).json('User chưa có nhóm')
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
     // ADD USER
     async addUser(req, res) {
         try{
-            const formData = req.body
-            const newUser = new User(formData)
-            const saveUser = await newUser.save()
-            res.status(200).json(saveUser)
+            const salt = await bcrypt.genSalt(10)
+            const hashed = await bcrypt.hash(req.body.password, salt)
+            
+            // Create new user
+            const newUser = await new User({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: hashed,
+                mssv: req.body.mssv,
+                phone: req.body.phone,
+                role: req.body.role
+            });
+
+            // // Save to DB
+            const user = await newUser.save();
+            res.status(200).json(newUser)
         }catch(err) {
             res.status(500).json(err)
         }
@@ -67,8 +104,12 @@ const userController = {
     // DELETE USER BY ID PARAMS
     async deleteUserWithParams (req, res) {
         try {
-            const user = await User.findByIdAndDelete(req.params.id)
-            res.status(200).json("Delete success...")
+            if (User.findById(req.params.id)) {
+                const user = await User.findByIdAndDelete(req.params.id)
+                res.status(200).json("Delete success...")
+            } else {
+                res.status(200).json("User not found")
+            }
         } catch (error) {
             res.status(500).json(error)
         }

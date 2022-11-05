@@ -19,6 +19,7 @@ const authController = {
                 password: hashed,
                 mssv: req.body.mssv,
                 phone: req.body.phone,
+                role: req.body.role
             });
 
             // // Save to DB
@@ -26,7 +27,7 @@ const authController = {
             res.status(200).json(newUser)
 
         } catch (error) {
-            res.status(500).json(USERNAME_EXIST)
+            res.status(500).json(ErrorCode.USERNAME_EXIST)
         }
     },
 

@@ -49,7 +49,7 @@ const topicController = {
                 }
                 const newTypeTopic = new Topic(formData)
                 const saveCate = await newTypeTopic.save()
-                res.status(200).json(saveCate)
+                res.status(200).json(saveCate) 
             }
         } catch(err) {
             res.status(500).json(err)

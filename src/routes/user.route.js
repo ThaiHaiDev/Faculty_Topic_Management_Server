@@ -31,4 +31,7 @@ router.delete('/', checkToken.verifyTokenAdminDelete, userController.deleteUserW
 // Update A User 
 router.put('/:id', checkToken.verifyTokenAdminAll, userController.updateUser)
 
+//
+router.get('/topic/:idUser', checkToken.verifyToken, userController.getATopic)
+
 module.exports = router
