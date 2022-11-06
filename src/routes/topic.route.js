@@ -11,7 +11,7 @@ router.get('/', checkToken.verifyTokenAdmin, topicController.getAllTopics)
 router.get('/approval1st', checkToken.verifyToken, topicController.getATopicApproval1st)
 
 //
-router.get('/notapproval', checkToken.verifyToken, topicController.getATopicNotApproval)
+router.get('/notapproval/:idGvhd', checkToken.verifyToken, topicController.getATopicNotApproval)
 
 //
 router.get('/approved', checkToken.verifyToken, topicController.getATopicApproved)

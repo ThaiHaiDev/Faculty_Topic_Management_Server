@@ -37,13 +37,15 @@ const topicController = {
     // Get topic not approved
     async getATopicNotApproval (req, res) {
         try {
-            const topic = await Topic.find({status: 'duyet0'}).populate('idSpecialized')
-                                                            .populate('typeTopic')
-                                                            .populate('leader')
-                                                            .populate('gvhd')
-                                                            .populate('gvpb')
-                                                            .populate('team')                        
-            res.status(200).json(topic)
+            const topicOfGv = await Topic.find({ gvhd: req.params.idGvhd }).populate('idSpecialized')
+                                                                            .populate('typeTopic')
+                                                                            .populate('leader')
+                                                                            .populate('gvhd')
+                                                                            .populate('gvpb')
+                                                                            .populate('team') 
+
+            const topicResult = topicOfGv.filter(data => { return data.status === 'duyet0' })                     
+            res.status(200).json(topicResult)
         } catch (error) {
             res.status(500).json(error)
         }
