@@ -4,8 +4,17 @@ const router = express.Router()
 const topicController = require('../app/controller/topicController');
 const checkToken = require('../middlewares/checkToken');
 
-// Get All Types Topic
+// Get All Topics
 router.get('/', checkToken.verifyTokenAdmin, topicController.getAllTopics)
+
+//
+router.get('/approval1st', checkToken.verifyToken, topicController.getATopicApproval1st)
+
+//
+router.get('/notapproval', checkToken.verifyToken, topicController.getATopicNotApproval)
+
+//
+router.get('/approved', checkToken.verifyToken, topicController.getATopicApproved)
 
 // Get A Type Topic
 router.get('/:id', checkToken.verifyToken, topicController.getATopic)
@@ -24,5 +33,6 @@ router.patch('/:id/1st', checkToken.verifyTokenAdmin, topicController.Approval1s
 
 // 2nd Approval
 router.patch('/:id/2nd', checkToken.verifyTokenAdmin, topicController.Approval2nd)
+
 
 module.exports = router

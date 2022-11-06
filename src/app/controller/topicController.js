@@ -34,6 +34,51 @@ const topicController = {
         }
     },
 
+    // Get topic not approved
+    async getATopicNotApproval (req, res) {
+        try {
+            const topic = await Topic.find({status: 'duyet0'}).populate('idSpecialized')
+                                                            .populate('typeTopic')
+                                                            .populate('leader')
+                                                            .populate('gvhd')
+                                                            .populate('gvpb')
+                                                            .populate('team')                        
+            res.status(200).json(topic)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
+    // Get topic approval 1st
+    async getATopicApproval1st (req, res) {
+        try {
+            const topic = await Topic.find({status: 'duyet1'}).populate('idSpecialized')
+                                                            .populate('typeTopic')
+                                                            .populate('leader')
+                                                            .populate('gvhd')
+                                                            .populate('gvpb')
+                                                            .populate('team')                        
+            res.status(200).json(topic)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
+    // Get topic approved
+    async getATopicApproved (req, res) {
+        try {
+            const topic = await Topic.find({status: 'duyet2'}).populate('idSpecialized')
+                                                            .populate('typeTopic')
+                                                            .populate('leader')
+                                                            .populate('gvhd')
+                                                            .populate('gvpb')
+                                                            .populate('team')                        
+            res.status(200).json(topic)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
     // ADD TOPIC
     async addTopic(req, res) {
         try{
@@ -88,9 +133,16 @@ const topicController = {
     // Approval first
     async Approval1st(req, res) {
         try {
-            appproval = 'duyet1'
-            await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
-            res.status(200).json(APPROVAL1ST)
+            const topic = await Topic.findById(req.params.id)
+
+            if (topic.status === 'duyet0') {
+                appproval = 'duyet1'
+                await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
+                res.status(200).json("Approval 1st success...")
+            } else {
+                res.status(400).json('Đề tài đã được duyệt')
+            }
+      
         } catch (error) {
             res.status(500).json(error)
         }
@@ -99,9 +151,18 @@ const topicController = {
     // Approval first
     async Approval2nd(req, res) {
         try {
-            appproval = 'duyet2'
-            await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
-            res.status(200).json("Approval 2nd success...")
+            const topic = await Topic.findById(req.params.id)
+
+            if (topic.status === 'duyet1') {
+                appproval = 'duyet2'
+                await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
+                res.status(200).json("Approval 2nd success...")
+            } else if (topic.status === 'duyet1') {
+                res.status(400).json('Đề tài cần được thông qua bởi giảng viên')
+            } else {
+                res.status(400).json('Đề tài đã được duyệt')
+            }
+            
         } catch (error) {
             res.status(500).json(error)
         }

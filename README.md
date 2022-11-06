@@ -759,12 +759,27 @@ Updating...
 </details>
 
 <details>
-<summary><b>Get A Topic With Id User</b></summary><br />
+<summary><b>Get A Topic With Id User (Lấy chi tiết đề tài đã đăng ký của user nào đó)</b></summary><br />
 
 </details>
 
 <details>
-<summary><b>GET USER IN TEAM WITH IDUSER</b></summary><br />
+<summary><b>GET USER IN TEAM WITH IDUSER (Lấy các user trong cùng nhóm đề tài đã đăng ký)</b></summary><br />
+
+</details>
+
+<details>
+<summary><b>(Lấy các đề tài chưa phê duyệt)</b></summary><br />
+
+</details>
+
+<details>
+<summary><b>(Lấy các đề tài đã được giảng viên thông qua nhưng chưa được trưởng khoa xem xét)</b></summary><br />
+
+</details>
+
+<details>
+<summary><b>(Lấy các đề tài đã thông qua do trưởng khoa phê duyệt)</b></summary><br />
 
 </details>
 
