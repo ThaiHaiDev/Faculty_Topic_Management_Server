@@ -99,6 +99,33 @@ const userController = {
         }
     },
 
+    // GET ALL TEAM WITH ID GVHD
+    async getAllTeamWithIdGvhd (req, res) {
+        try {
+            const ArrayTeam = [];
+            const topicOfGv = await Topic.find({ gvhd: req.params.idGvhd }).populate('team').populate('leader')  
+            for (var i = 0; i < topicOfGv.length; i++) {
+                if (topicOfGv[i].leader) {
+                    const team = {
+                        teams: topicOfGv[i].team.filter(data => { return data._id.toString() !== topicOfGv[i].leader._id.toString()}),
+                        leader: topicOfGv[i].leader
+                    }
+                    ArrayTeam.push(team)
+                } else {
+                    const team = {
+                        teams: topicOfGv[i].team,
+                        leader: topicOfGv[i].leader
+                    }
+                    ArrayTeam.push(team)
+                }
+                
+            }
+            res.status(200).json(ArrayTeam)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
     // ADD USER
     async addUser(req, res) {
         try{

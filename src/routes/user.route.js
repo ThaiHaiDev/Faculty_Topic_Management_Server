@@ -37,4 +37,7 @@ router.get('/topic/:idUser', checkToken.verifyToken, userController.getATopic)
 //
 router.get('/member/:idUser', checkToken.verifyToken, userController.getMemberInTeam)
 
+//
+router.get('/team/:idGvhd', checkToken.verifyToken, userController.getAllTeamWithIdGvhd)
+
 module.exports = router

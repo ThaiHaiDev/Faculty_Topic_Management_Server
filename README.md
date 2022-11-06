@@ -783,6 +783,11 @@ Updating...
 
 </details>
 
+<details>
+<summary><b>(Lấy thông tin các nhóm đã đăng ký của 1 giảng viên kèm leader của nhóm)</b></summary><br />
+
+</details>
+
 # Message (updating...)
 
 ## Error
