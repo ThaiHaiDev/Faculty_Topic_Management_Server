@@ -2,6 +2,8 @@ const User = require('../models/user.model');
 const Topic = require('../models/topic.model');
 const bcrypt = require('bcrypt');
 
+const ErrorCode = require('../../exceptions/errorCode');
+
 const userController = {
     // GET ALL USERS
     async getAllUsers (req, res) {
@@ -54,7 +56,7 @@ const userController = {
     },
 
     // GET TOPIC WITH IDUSER
-    async getATopic (req, res) {
+    async getATopicWithIdUser (req, res) {
         try {
             const topic = await Topic.find().populate('idSpecialized')
                                                             .populate('typeTopic')
@@ -75,7 +77,7 @@ const userController = {
                     break
                 }
             }                                             
-            res.status(200).json('User chưa đăng ký đề tài')
+            res.status(400).json(ErrorCode.USER_NOT_REGISTER_TOPIC)
         } catch (error) {
             res.status(500).json(error)
         }
@@ -93,7 +95,7 @@ const userController = {
                     break
                 }
             }                                             
-            res.status(400).json('User không có nhóm')
+            res.status(400).json(ErrorCode.USER_NOT_TEAM)
         } catch (error) {
             res.status(500).json(error)
         }
@@ -156,9 +158,9 @@ const userController = {
         try {
             if (User.findById(req.params.id)) {
                 const user = await User.findByIdAndDelete(req.params.id)
-                res.status(200).json("Delete success...")
+                res.status(200).json("Xóa thành công")
             } else {
-                res.status(200).json("Không tìm thấy user")
+                res.status(404).json(ErrorCode.USER_NOT_FOUND)
             }
         } catch (error) {
             res.status(500).json(error)
@@ -169,7 +171,7 @@ const userController = {
     async deleteUserWithBody (req, res) {
         try {
             const user = await User.findByIdAndDelete(req.body.id)
-            res.status(200).json("Delete success...")
+            res.status(200).json("Xóa thành công")
         } catch (error) {
             res.status(500).json(error)
         }
@@ -183,7 +185,7 @@ const userController = {
             const salt = await bcrypt.genSalt(10)
             const hashed = await bcrypt.hash(password, salt)
             await User.updateOne({ _id: req.params.id }, {...others, password: hashed}) 
-            res.status(200).json('Updating success...')
+            res.status(200).json('Cập nhật thông tin thành công')
         } catch (error) {
             res.status(500).json(error)
         }

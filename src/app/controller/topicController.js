@@ -1,7 +1,9 @@
 const Topic = require('../models/topic.model');
 const User = require('../models/user.model');
 
-const checkMaxGv = require('../../services/checkMaxGv')
+const checkMaxGv = require('../../services/checkMaxGv');
+
+const ErrorCode = require('../../exceptions/errorCode');
 
 const topicController = {
     // GET ALL TOPIC
@@ -48,7 +50,7 @@ const topicController = {
             if (topicResult.length > 0) {
                 res.status(200).json(topicResult)
             } else {
-                res.status(400).json('Giảng viên chưa có đề tài nào cần duyệt')
+                res.status(400).json(ErrorCode.USERGV_NOT_TOPIC_APPROVAL)
             }               
         } catch (error) {
             res.status(500).json(error)
@@ -107,16 +109,16 @@ const topicController = {
             const formData = req.body
 
             if (parseInt(req.body.team.length) > parseInt(req.body.slsv)) {
-                res.status(401).json('Số lượng sinh viên quá giới hạn....')
+                res.status(400).json(ErrorCode.LIMITED_USER_REGISTER_TOPIC)
             } else {
                 const topicOfGvhd = await Topic.find({gvhd: req.body.gvhd})
                 if (parseInt(topicOfGvhd.length) > 8) {
-                    res.status(401).json('Giáo viên đã đủ nhóm đăng kí') 
+                    res.status(400).json(ErrorCode.USERGV_FULL_SLOT_REGISTER) 
                 } else {
                     for (var i = 0; i < parseInt(req.body.team.length); i++) {
                         const userInTeam = await User.findById(req.body.team[i])
                         if (userInTeam.isTeam === true) {
-                            return res.status(403).json('User đã có nhóm...')
+                            return res.status(403).json(ErrorCode.USER_IS_TEAM)
                         } else {
                             await User.updateOne({ _id: req.body.team[i] }, {isTeam: true}) 
                         }
@@ -135,7 +137,7 @@ const topicController = {
     async deleteTopic (req, res) {
         try {
             await Topic.findByIdAndDelete(req.params.id)
-            res.status(200).json("Delete success...")
+            res.status(200).json("Xóa thành công")
         } catch (error) {
             res.status(500).json(error)
         }
@@ -146,7 +148,7 @@ const topicController = {
         try {
             const formData = req.body
             await Topic.updateOne({ _id: req.params.id }, formData) 
-            res.status(200).json("Update success...")
+            res.status(200).json("Cập nhật thành công")
         } catch (error) {
             res.status(500).json(error)
         }
@@ -160,9 +162,9 @@ const topicController = {
             if (topic.status === 'duyet0') {
                 appproval = 'duyet1'
                 await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
-                res.status(200).json("Approval 1st success...")
+                res.status(200).json("Phê duyệt lần 1 thành công")
             } else {
-                res.status(400).json('Đề tài đã được duyệt')
+                res.status(400).json(ErrorCode.TOPIC_APPROVED)
             }
       
         } catch (error) {
@@ -178,11 +180,11 @@ const topicController = {
             if (topic.status === 'duyet1') {
                 appproval = 'duyet2'
                 await Topic.updateOne({ _id: req.params.id }, {status: appproval}) 
-                res.status(200).json("Approval 2nd success...")
+                res.status(200).json("Đề tài đã được duyệt lần 2 thành công")
             } else if (topic.status === 'duyet1') {
-                res.status(400).json('Đề tài cần được thông qua bởi giảng viên')
+                res.status(400).json(ErrorCode.TOPIC_NOT_APPROVAL)
             } else {
-                res.status(400).json('Đề tài đã được duyệt')
+                res.status(400).json(ErrorCode.TOPIC_APPROVED)
             }
             
         } catch (error) {

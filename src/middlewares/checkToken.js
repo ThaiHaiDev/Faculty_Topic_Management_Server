@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../app/models/user.model');
 
+const ErrorCode = require('../exceptions/errorCode');
+
 const middlewareController = {
     // verifyToken
     verifyToken: (req, res, next) => {
@@ -10,14 +12,14 @@ const middlewareController = {
             const accessToken = token.split(" ")[1]
             jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, user) => {
                 if(err) {
-                    return res.status(403).json('Token is not valid')
+                    return res.status(403).json(ErrorCode.TOKEN_IS_NOT_VALID)
                 }
                 req.user = user;
                 next();  
             })
         }
         else {
-            return res.status(401).json("You're not authenticated")
+            return res.status(401).json(ErrorCode.NOT_AUTHENTICATED)
         }
     },
 
@@ -32,11 +34,11 @@ const middlewareController = {
                     next();
                 }
                 else {
-                    return res.status(403).json("You're not allowed to delete orther...")
+                    return res.status(403).json(ErrorCode.NOT_ALLOW_DELETE_ORTHER)
                 }
             }
             else {
-                return res.status(404).json("User not found")
+                return res.status(404).json(ErrorCode.USER_NOT_FOUND)
             }
            
         })
@@ -49,7 +51,7 @@ const middlewareController = {
                 next();
             }
             else {
-                return res.status(403).json("You're not allowed to orther...")
+                return res.status(403).json(ErrorCode.NOT_ALLOW_ORTHER)
             }
         })
     },
@@ -62,7 +64,7 @@ const middlewareController = {
                 next();
             }
             else {
-                return res.status(403).json("You're not allowed to orther...")
+                return res.status(403).json(ErrorCode.NOT_ALLOW_ORTHER)
             }
         })
     }

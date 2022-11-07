@@ -32,10 +32,6 @@ const ErrorCode = {
         code: "40000002", 
         message: "User không có nhóm"
     },
-    USER_NOT_TEAM: {
-        code: "40000003", 
-        message: "User không có nhóm"
-    },
     USER_IS_TEAM: {
         code: "40000004", 
         message: "User đã có nhóm"
@@ -50,7 +46,7 @@ const ErrorCode = {
     },
     USERGV_FULL_SLOT_REGISTER: {
         code: "40000007", 
-        message: "Giáo viên đã đủ nhóm đăng kí"
+        message: "Giảng viên đã đủ nhóm đăng kí"
     },
     TOPIC_APPROVED: {
         code: "40000008", 
@@ -59,6 +55,20 @@ const ErrorCode = {
     TOPIC_NOT_APPROVAL: {
         code: "40000009", 
         message: "Đề tài cần được thông qua bởi giảng viên"
+    },
+
+    // 403
+    TOKEN_IS_NOT_VALID: {
+        code: "40300001", 
+        message: "Token is not valid"
+    },
+    NOT_ALLOW_DELETE_ORTHER: {
+        code: "40300002", 
+        message: "You're not allowed to delete orther"
+    },
+    NOT_ALLOW_ORTHER: {
+        code: "40300003", 
+        message: "You're not allowed to orther"
     },
 
 

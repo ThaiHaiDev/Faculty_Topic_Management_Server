@@ -31,13 +31,13 @@ router.delete('/', checkToken.verifyTokenAdminDelete, userController.deleteUserW
 // Update A User 
 router.put('/:id', checkToken.verifyTokenAdminAll, userController.updateUser)
 
-//
-router.get('/topic/:idUser', checkToken.verifyToken, userController.getATopic)
+// Lấy thông tin topic với iduser
+router.get('/topic/:idUser', checkToken.verifyToken, userController.getATopicWithIdUser)
 
-//
+// Lấy thông tin các user trong cùng team
 router.get('/member/:idUser', checkToken.verifyToken, userController.getMemberInTeam)
 
-//
+// Lấy thông tin các nhóm đã đăng ký của 1 giảng viên kèm leader của nhóm
 router.get('/team/:idGvhd', checkToken.verifyToken, userController.getAllTeamWithIdGvhd)
 
 module.exports = router
