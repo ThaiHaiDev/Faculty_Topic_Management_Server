@@ -44,8 +44,28 @@ const topicController = {
                                                                             .populate('gvpb')
                                                                             .populate('team') 
 
-            const topicResult = topicOfGv.filter(data => { return data.status === 'duyet0' })                     
-            res.status(200).json(topicResult)
+            const topicResult = topicOfGv.filter(data => { return data.status === 'duyet0' })   
+            if (topicResult.length > 0) {
+                res.status(200).json(topicResult)
+            } else {
+                res.status(400).json('Giảng viên chưa có đề tài nào cần duyệt')
+            }               
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+
+    // Get all topic of gvhd
+    async getAllTopicOfGvHd (req, res) {
+        try {
+            const topicOfGv = await Topic.find({ gvhd: req.params.idGvhd }).populate('idSpecialized')
+                                                                            .populate('typeTopic')
+                                                                            .populate('leader')
+                                                                            .populate('gvhd')
+                                                                            .populate('gvpb')
+                                                                            .populate('team') 
+
+           res.status(200).json(topicOfGv)             
         } catch (error) {
             res.status(500).json(error)
         }

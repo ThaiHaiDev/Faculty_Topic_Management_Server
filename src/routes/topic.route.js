@@ -14,12 +14,15 @@ router.get('/approval1st', checkToken.verifyToken, topicController.getATopicAppr
 router.get('/notapproval/:idGvhd', checkToken.verifyToken, topicController.getATopicNotApproval)
 
 //
+router.get('/alltopicofgvhd/:idGvhd', checkToken.verifyToken, topicController.getAllTopicOfGvHd)
+
+//
 router.get('/approved', checkToken.verifyToken, topicController.getATopicApproved)
 
-// Get A Type Topic
+// Get A Topic
 router.get('/:id', checkToken.verifyToken, topicController.getATopic)
 
-// Add A Type Topic
+// Add A Topic
 router.post('/', checkToken.verifyToken, topicController.addTopic)
 
 // Update A Type Topic

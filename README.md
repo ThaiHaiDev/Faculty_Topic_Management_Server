@@ -769,7 +769,12 @@ Updating...
 </details>
 
 <details>
-<summary><b>(Lấy các đề tài chưa phê duyệt)</b></summary><br />
+<summary><b>(Lấy các đề tài chưa phê duyệt tương ứng với id của từng giảng viên)</b></summary><br />
+
+</details>
+
+<details>
+<summary><b>(Lấy tất cả các đề tài tương ứng với id của từng giảng viên)</b></summary><br />
 
 </details>
 

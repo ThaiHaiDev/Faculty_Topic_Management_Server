@@ -158,7 +158,7 @@ const userController = {
                 const user = await User.findByIdAndDelete(req.params.id)
                 res.status(200).json("Delete success...")
             } else {
-                res.status(200).json("User not found")
+                res.status(200).json("Không tìm thấy user")
             }
         } catch (error) {
             res.status(500).json(error)
