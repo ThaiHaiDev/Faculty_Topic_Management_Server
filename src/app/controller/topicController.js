@@ -136,8 +136,13 @@ const topicController = {
     // DELETE TOPIC
     async deleteTopic (req, res) {
         try {
+            const userInTopic = await Topic.find({_id: req.params.id})
+            const listIdUser = userInTopic[0].team
+            for (var i = 0; i < listIdUser.length; i++) {
+                await User.updateOne({ _id: listIdUser[i] }, {isTeam: false}) 
+            }
             await Topic.findByIdAndDelete(req.params.id)
-            res.status(200).json("Xóa thành công")
+            res.status(200).json('Xóa thành công...')
         } catch (error) {
             res.status(500).json(error)
         }
