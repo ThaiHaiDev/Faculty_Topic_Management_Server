@@ -151,9 +151,44 @@ const topicController = {
     // UPDATE TOPIC
     async updateTopic(req, res) {
         try {
+            const checkTopic = await Topic.find({_id: req.params.id})
             const formData = req.body
-            await Topic.updateOne({ _id: req.params.id }, formData) 
-            res.status(200).json("Cập nhật thành công")
+            const token = req.headers.token;
+
+            if(token) {
+                const accessToken = token.split(" ")[1]
+                jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, async (err, user) => {
+                    if(err) {
+                        return res.status(403).json(ErrorCode.TOKEN_IS_NOT_VALID)
+                    }
+                    req.user = user;
+                    if (req.user.role === 'dean') {
+                        await Topic.updateOne({ _id: req.params.id }, formData) 
+                        res.status(200).json("Cập nhật thành công")
+                    } else if (req.user.role === 'lecturers') {
+                        if (checkTopic[0].gvhd.toString() !== req.user.id) {
+                            return res.status(400).json('Bạn không phải là gvhd của đề tài này')
+                        }
+                        if (checkTopic[0].status === 'duyet2') {
+                            return res.status(400).json('Đề tài này đã được trưởng khoa thông qua')
+                        } 
+                        await Topic.updateOne({ _id: req.params.id }, formData) 
+                        res.status(200).json("Cập nhật thành công")
+                    } else {
+                        if (checkTopic[0].leader.toString() !== req.user.id) {
+                            return res.status(400).json('Bạn không phải leader')
+                        }
+                        if (checkTopic[0].status === 'duyet1') {
+                            return res.status(400).json('Đề tài này đã được gvhd thông qua')
+                        } 
+                        await Topic.updateOne({ _id: req.params.id }, formData) 
+                        res.status(200).json("Cập nhật thành công")
+                    }
+                })
+            }
+            else {
+                return res.status(401).json(ErrorCode.NOT_AUTHENTICATED)
+            } 
         } catch (error) {
             res.status(500).json(error)
         }

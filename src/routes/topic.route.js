@@ -26,7 +26,7 @@ router.get('/:id', checkToken.verifyToken, topicController.getATopic)
 router.post('/', checkToken.verifyToken, topicController.addTopic)
 
 // Update A Type Topic
-router.put('/:id', checkToken.verifyTokenAdminAll, topicController.updateTopic)
+router.put('/:id', checkToken.verifyToken, topicController.updateTopic)
 
 // Delete A Type Topic
 router.delete('/:id', checkToken.verifyTokenAdminAll, topicController.deleteTopic)
