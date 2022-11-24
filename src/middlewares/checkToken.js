@@ -56,6 +56,30 @@ const middlewareController = {
         })
     },
 
+    verifyTokenAdmin1st: (req, res, next) => {
+        middlewareController.verifyToken(req, res, () => {
+            // Nếu id của user login = id user mình muốn AU hoặc là admin
+            if(req.user.id == req.params.id || req.user.role === 'lecturers') { 
+                next();
+            }
+            else {
+                return res.status(403).json(ErrorCode.NOT_ALLOW_ORTHER)
+            }
+        })
+    },
+
+    verifyTokenAdmin2nd: (req, res, next) => {
+        middlewareController.verifyToken(req, res, () => {
+            // Nếu id của user login = id user mình muốn AU hoặc là admin
+            if(req.user.id == req.params.id || req.user.role === 'dean') { 
+                next();
+            }
+            else {
+                return res.status(403).json(ErrorCode.NOT_ALLOW_ORTHER)
+            }
+        })
+    },
+
     // verifyTokenAdmin when update
     verifyTokenAdminAll: (req, res, next) => {
         middlewareController.verifyToken(req, res, () => {

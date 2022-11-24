@@ -50,6 +50,7 @@ The website includes 3 rights, helping students register a topic name and choose
 -	Student:
     + Each student can choose 1 instructor, students can only be in a group with 3 members, students who already have a group mean that they have already registered the topic, they cannot register the topic themselves.
     + When registering, students fill in the information of group members.
+    + Students can manipulate to register the topic name. Students have the right to delete the registered topic name.
 
 Updating...
 
@@ -78,6 +79,7 @@ Trang web bao gồm 3 quyền, giúp sinh viên đăng ký tên đề tài và c
 -	Sinh viên: 
     + Mỗi sinh viên được chọn 1 giảng viên hướng dẫn, sinh viên chỉ được nằm trong 1 nhóm có 3 thành viên, sinh viên đãz có nhóm là đồng nghĩa đã đăng ký đề tài, không thể tự đăng ký đề tài tiếp. 
     + Khi đăng kí, sinh viên điền thông tin các thành viên trong nhóm. 
+    + Sinh viên có thể thao tác đăng kí tên đề tài. Sinh viên có quyền xóa tên đề tài đăng kí.
 
 Updating...
 

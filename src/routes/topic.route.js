@@ -32,10 +32,10 @@ router.put('/:id', checkToken.verifyToken, topicController.updateTopic)
 router.delete('/:id', checkToken.verifyTokenAdminAll, topicController.deleteTopic)
 
 // 1st Approval
-router.patch('/:id/1st', checkToken.verifyTokenAdmin, topicController.Approval1st)
+router.patch('/:id/1st', checkToken.verifyTokenAdmin1st, topicController.Approval1st)
 
 // 2nd Approval
-router.patch('/:id/2nd', checkToken.verifyTokenAdmin, topicController.Approval2nd)
+router.patch('/:id/2nd', checkToken.verifyTokenAdmin2nd, topicController.Approval2nd)
 
 
 module.exports = router
