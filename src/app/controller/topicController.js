@@ -109,10 +109,20 @@ const topicController = {
     async addTopic(req, res) {
         try{
             const formData = req.body
-
+            console.log(req.body);
+          
             if (parseInt(req.body.team.length) > parseInt(req.body.slsv)) {
                 res.status(400).json(ErrorCode.LIMITED_USER_REGISTER_TOPIC)
             } else {
+                if (req.body.gvhd === '') {
+                    return res.status(400).json(ErrorCode.GVHD_NOT_BLANK)
+                }
+                if (req.body.idSpecialized === '') {
+                    return res.status(400).json(ErrorCode.SPECIALIZED_NOT_BLANK)
+                }
+                if (req.body.typeTopic === '') {
+                    return res.status(400).json(ErrorCode.TYPE_TOPIC_NOT_BLANK)
+                }
                 const topicOfGvhd = await Topic.find({gvhd: req.body.gvhd})
                 if (parseInt(topicOfGvhd.length) > 8) {
                     res.status(400).json(ErrorCode.USERGV_FULL_SLOT_REGISTER) 
