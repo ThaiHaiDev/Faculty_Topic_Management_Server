@@ -56,6 +56,18 @@ const ErrorCode = {
         code: "40000009", 
         message: "Đề tài cần được thông qua bởi giảng viên"
     },
+    GVHD_NOT_BLANK: {
+        code: "40000010", 
+        message: "Giảng viên hướng dẫn không được phép để trống"
+    },
+    SPECIALIZED_NOT_BLANK: {
+        code: "40000011", 
+        message: "Chuyên ngành không được phép để trống"
+    },
+    TYPE_TOPIC_NOT_BLANK: {
+        code: "40000012", 
+        message: "Loại đề tài không được phép để trống"
+    },
 
     // 403
     TOKEN_IS_NOT_VALID: {
