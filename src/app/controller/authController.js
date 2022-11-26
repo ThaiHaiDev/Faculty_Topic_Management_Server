@@ -73,7 +73,7 @@ const authController = {
                 const refreshToken = authController.generateRefreshToken(user);
 
                 // save refreshToken trong Cookies
-                res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+                res.setHeader('Access-Control-Allow-Origin', 'https://main--harmonious-tarsier-7abd94.netlify.app');
                 res.setHeader('Access-Control-Allow-Credentials',true);
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: false,

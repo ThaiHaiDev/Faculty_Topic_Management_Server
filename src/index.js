@@ -17,12 +17,21 @@ app.use(bodyParser.json())
 db.connect()
 
 // Khi xài cookies thì phải có cors config này với url là của FE
+// app.use(cors({
+//     origin: ["*", "http://localhost:3000/", "https://main--harmonious-tarsier-7abd94.netlify.app/"],
+// }))
+
+// Your origin prop in cors({})
 app.use(cors({
     origin: [
-        "http://localhost:3000",
+        "https://main--harmonious-tarsier-7abd94.netlify.app/",
     ],
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
     credentials: true,
+    origin: true,
 }))
+
+
 app.use(cookieParser())
 app.use(express.json())
 
