@@ -108,9 +108,9 @@ const topicController = {
     // ADD TOPIC
     async addTopic(req, res) {
         try{
+            const formData = req.body
             console.log(req.body);
           
-            
             if (parseInt(req.body.team.length) > parseInt(req.body.slsv)) {
                 res.status(400).json(ErrorCode.LIMITED_USER_REGISTER_TOPIC)
             } else {
