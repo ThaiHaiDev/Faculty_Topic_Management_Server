@@ -27,7 +27,7 @@ db.connect()
 // Your origin prop in cors({})
 app.use(cors({
     origin: [
-        "https://main--harmonious-tarsier-7abd94.netlify.app/", "http://localhost:3000/"
+        "https://main--harmonious-tarsier-7abd94.netlify.app/", "http://localhost:3000/", "https://6390b4e713a274352fbc4084--resplendent-sunflower-2693dc.netlify.app/"
     ],
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
     credentials: true,
