@@ -73,7 +73,7 @@ const authController = {
                 const refreshToken = authController.generateRefreshToken(user);
 
                 // save refreshToken trong Cookies
-                res.setHeader('Access-Control-Allow-Origin', 'https://6390b4e713a274352fbc4084--resplendent-sunflower-2693dc.netlify.app');
+                res.setHeader('Access-Control-Allow-Origin', 'https://resplendent-sunflower-2693dc.netlify.app');
                 // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
                 res.setHeader('Access-Control-Allow-Credentials',true);
                 res.cookie('refreshToken', refreshToken, {
