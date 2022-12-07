@@ -52,6 +52,11 @@ The website includes 3 rights, helping students register a topic name and choose
     + When registering, students fill in the information of group members.
     + Students can manipulate to register the topic name. Students have the right to delete the registered topic name.
 
+Constraint:
+* When the topic has not been approved, only the group leader has the right to update and delete the topic.
+* When the topic is approved for the first time (approved by the lecturer), students are no longer allowed to update and delete the topic (even as the group leader). But now only lecturers (lecturers who are not of that topic also have no rights) or deans have the right.
+* When the topic is approved (approved by the Dean), neither the student nor the lecturer has the right to update and delete.
+
 Updating...
 
 ***Currently the server is still being updated with the necessary functions, the update will be regularly updated here. Thank you!***
@@ -80,6 +85,12 @@ Trang web bao gồm 3 quyền, giúp sinh viên đăng ký tên đề tài và c
     + Mỗi sinh viên được chọn 1 giảng viên hướng dẫn, sinh viên chỉ được nằm trong 1 nhóm có 3 thành viên, sinh viên đãz có nhóm là đồng nghĩa đã đăng ký đề tài, không thể tự đăng ký đề tài tiếp. 
     + Khi đăng kí, sinh viên điền thông tin các thành viên trong nhóm. 
     + Sinh viên có thể thao tác đăng kí tên đề tài. Sinh viên có quyền xóa tên đề tài đăng kí.
+
+
+Ràng buộc: 
+* Khi đề tài chưa được phê duyệt thì chỉ có trưởng nhóm có quyền cập nhật và xóa đề tài.
+* Khi đề tài được duyệt lần 1 (do giảng viên duyệt) thì sinh viên không còn được quyền cập nhật và xóa đề tài (cho dù là trưởng nhóm). Mà giờ chỉ có giảng viên (giảng viên không phải của đề tài đó cũng không có quyền) hoặc trưởng khoa có quyền.
+* khi đề tài được thông qua (do trưởng khoa duyệt) thì cả sinh viên và giảng viên đều không có quyền cập nhật và xóa. 
 
 Updating...
 

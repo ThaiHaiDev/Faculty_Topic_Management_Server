@@ -109,7 +109,6 @@ const topicController = {
     async addTopic(req, res) {
         try{
             const formData = req.body
-            console.log(req.body);
           
             if (parseInt(req.body.team.length) > parseInt(req.body.slsv)) {
                 res.status(400).json(ErrorCode.LIMITED_USER_REGISTER_TOPIC)
@@ -148,13 +147,65 @@ const topicController = {
     // DELETE TOPIC
     async deleteTopic (req, res) {
         try {
-            const userInTopic = await Topic.find({_id: req.params.id})
-            const listIdUser = userInTopic[0].team
-            for (var i = 0; i < listIdUser.length; i++) {
-                await User.updateOne({ _id: listIdUser[i] }, {isTeam: false}) 
+            const checkTopic = await Topic.find({_id: req.params.id})
+            const formData = req.body
+            const token = req.headers.token;
+
+            if(token) {
+                const accessToken = token.split(" ")[1]
+                jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, async (err, user) => {
+                    if(err) {
+                        return res.status(403).json(ErrorCode.TOKEN_IS_NOT_VALID)
+                    }
+                    req.user = user;
+                    if (req.user.role === 'dean') {
+                        // Function remove
+                        const userInTopic = await Topic.find({_id: req.params.id})
+                        const listIdUser = userInTopic[0].team
+                        for (var i = 0; i < listIdUser.length; i++) {
+                            await User.updateOne({ _id: listIdUser[i] }, {isTeam: false}) 
+                        }
+                        await Topic.findByIdAndDelete(req.params.id)
+                        // End function remove
+                        res.status(200).json("Xóa thành công")
+                    } else if (req.user.role === 'lecturers') {
+                        if (checkTopic[0].gvhd.toString() !== req.user.id) {
+                            return res.status(400).json('Bạn không phải là gvhd của đề tài này')
+                        }
+                        if (checkTopic[0].status === 'duyet2') {
+                            return res.status(400).json('Đề tài này đã được trưởng khoa thông qua')
+                        } 
+                        // Function remove
+                        const userInTopic = await Topic.find({_id: req.params.id})
+                        const listIdUser = userInTopic[0].team
+                        for (var i = 0; i < listIdUser.length; i++) {
+                            await User.updateOne({ _id: listIdUser[i] }, {isTeam: false}) 
+                        }
+                        await Topic.findByIdAndDelete(req.params.id)
+                        // End function remove
+                        res.status(200).json("Xóa thành công")
+                    } else {
+                        if (checkTopic[0].leader.toString() !== req.user.id) {
+                            return res.status(400).json('Bạn không phải trưởng nhóm')
+                        }
+                        if (checkTopic[0].status === 'duyet1') {
+                            return res.status(400).json('Đề tài này đã được gvhd thông qua')
+                        } 
+                        // Function remove
+                        const userInTopic = await Topic.find({_id: req.params.id})
+                        const listIdUser = userInTopic[0].team
+                        for (var i = 0; i < listIdUser.length; i++) {
+                            await User.updateOne({ _id: listIdUser[i] }, {isTeam: false}) 
+                        }
+                        await Topic.findByIdAndDelete(req.params.id)
+                        // End function remove
+                        res.status(200).json("Xóa thành công")
+                    }
+                })
             }
-            await Topic.findByIdAndDelete(req.params.id)
-            res.status(200).json('Xóa thành công...')
+            else {
+                return res.status(401).json(ErrorCode.NOT_AUTHENTICATED)
+            } 
         } catch (error) {
             res.status(500).json(error)
         }
@@ -188,7 +239,7 @@ const topicController = {
                         res.status(200).json("Cập nhật thành công")
                     } else {
                         if (checkTopic[0].leader.toString() !== req.user.id) {
-                            return res.status(400).json('Bạn không phải leader')
+                            return res.status(400).json('Bạn không phải trưởng nhóm')
                         }
                         if (checkTopic[0].status === 'duyet1') {
                             return res.status(400).json('Đề tài này đã được gvhd thông qua')

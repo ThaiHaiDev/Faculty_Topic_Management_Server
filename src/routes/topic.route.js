@@ -29,7 +29,7 @@ router.post('/', checkToken.verifyToken, topicController.addTopic)
 router.put('/:id', checkToken.verifyToken, topicController.updateTopic)
 
 // Delete A Type Topic
-router.delete('/:id', checkToken.verifyTokenAdminAll, topicController.deleteTopic)
+router.delete('/:id', checkToken.verifyToken, topicController.deleteTopic)
 
 // 1st Approval
 router.patch('/:id/1st', checkToken.verifyTokenAdmin1st, topicController.Approval1st)
