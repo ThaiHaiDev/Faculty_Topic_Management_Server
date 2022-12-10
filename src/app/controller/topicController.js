@@ -130,9 +130,10 @@ const topicController = {
                         const userInTeam = await User.findById(req.body.team[i])
                         if (userInTeam.isTeam === true) {
                             return res.status(403).json(ErrorCode.USER_IS_TEAM)
-                        } else {
-                            await User.updateOne({ _id: req.body.team[i] }, {isTeam: true}) 
-                        }
+                        } 
+                    }
+                    for (var i = 0; i < parseInt(req.body.team.length); i++) {
+                        await User.updateOne({ _id: req.body.team[i] }, {isTeam: true}) 
                     }
                     const newTypeTopic = new Topic(formData)
                     const saveCate = await newTypeTopic.save()

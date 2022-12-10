@@ -82,7 +82,7 @@ Trang web bao gồm 3 quyền, giúp sinh viên đăng ký tên đề tài và c
     + Giảng viên có quyền CRUD với đề tài của nhóm sinh viên.
 
 -	Sinh viên: 
-    + Mỗi sinh viên được chọn 1 giảng viên hướng dẫn, sinh viên chỉ được nằm trong 1 nhóm có 3 thành viên, sinh viên đãz có nhóm là đồng nghĩa đã đăng ký đề tài, không thể tự đăng ký đề tài tiếp. 
+    + Mỗi sinh viên được chọn 1 giảng viên hướng dẫn, sinh viên chỉ được nằm trong 1 nhóm có 3 thành viên, sinh viên đã có nhóm là đồng nghĩa đã đăng ký đề tài, không thể tự đăng ký đề tài tiếp. 
     + Khi đăng kí, sinh viên điền thông tin các thành viên trong nhóm. 
     + Sinh viên có thể thao tác đăng kí tên đề tài. Sinh viên có quyền xóa tên đề tài đăng kí.
 
@@ -678,7 +678,7 @@ Updating...
 <details>
 <summary><b>Add A Topic &nbsp; &nbsp; ( &nbsp;Thêm mới đề tài &nbsp;)</b></summary><br />
 
-- *POST: **api/v1/typetopic*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
+- *POST: **api/v1/topic*** &nbsp; &nbsp; -- &nbsp; &nbsp;  **[content-type: application/json]** <br />
 - Headers: &nbsp; **[token] : Bearer {accessToken}**
 - Request:
     | params    | type   | require |
@@ -926,6 +926,10 @@ Updating...
 - Giảng viên đã đủ nhóm đăng kí
 - Đề tài đã được duyệt trước đó
 - Đề tài cần được thông qua bởi giảng viên
+- Bạn không phải là gvhd của đề tài này
+- Đề tài này đã được trưởng khoa thông qua
+- Bạn không phải trưởng nhóm
+- Đề tài này đã được gvhd thông qua
 
 ## 401
 - You're not authenticated
