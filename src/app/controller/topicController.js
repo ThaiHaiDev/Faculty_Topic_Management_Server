@@ -2,10 +2,7 @@ const Topic = require('../models/topic.model');
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
-const checkMaxGv = require('../../services/checkMaxGv');
-
 const ErrorCode = require('../../exceptions/errorCode');
-const { findById } = require('../models/topic.model');
 
 const topicController = {
     // GET ALL TOPIC
